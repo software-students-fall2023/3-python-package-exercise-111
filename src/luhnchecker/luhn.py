@@ -47,11 +47,16 @@ class Luhn:
         if length < 13 or length > 19:
             raise ValueError("Card number length must be between 13 and 19")
 
-        card_number = [random.randint(0, 9) for _ in range(length - 1)]
-        card_number = [str(digit) for digit in card_number]
-        card_number_without_check_digit = ''.join(card_number)
-        check_digit = Luhn.generate_check_digit(card_number_without_check_digit)
-        return card_number_without_check_digit + str(check_digit)
+        # Generate a card number with length minus one
+        card_number_without_check_digit = ''.join(str(random.randint(0, 9)) for _ in range(length - 1))
+
+        # The check digit is what needs to be added to make the sum of the digits
+        # a multiple of 10. Here we calculate it by constructing what the full card
+        # number would be with a 0 in the check digit position, and then adjusting
+        # the check digit until the whole number passes the Luhn check.
+        for check_digit in range(10):
+            if Luhn.check_luhn(card_number_without_check_digit + str(check_digit)):
+                return card_number_without_check_digit + str(check_digit)
     
     @staticmethod
     def mask_card_number(card_number):
@@ -59,9 +64,25 @@ class Luhn:
         masked_card = '*' * (len(card_number) - 4) + card_number[-4:]
         return masked_card
 
-# The code below is not needed for the package but can be used for a simple CLI or tests
+    @staticmethod
+    def credit_card_issuer(card_number):
+        if card_number.startswith('4'):
+            return 'Visa'
+        elif (card_number.startswith(('51', '52', '53', '54', '55')) or
+              222100 <= int(card_number[:6]) <= 272099):
+            return 'MasterCard'
+        elif card_number.startswith(('34', '37')):
+            return 'American Express'
+        elif (card_number.startswith('6011') or
+              card_number.startswith(('644', '645', '646', '647', '648', '649')) or
+              card_number.startswith('65') or
+              622126 <= int(card_number[:6]) <= 622925):
+            return 'Discover'
+        else:
+            return 'Unknown'
+
+
 if __name__ == "__main__":
-    # Example usage:
     card_numbers = ["49927398716", "49927398717", "1234567812345670", "1234567812345678"]
 
     for number in card_numbers:
