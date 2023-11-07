@@ -59,6 +59,23 @@ class Luhn:
         masked_card = '*' * (len(card_number) - 4) + card_number[-4:]
         return masked_card
 
+    @staticmethod
+    def credit_card_issuer(card_number):
+    if card_number.startswith('4'):
+        return 'Visa'
+    elif (card_number.startswith(('51', '52', '53', '54', '55')) or
+          222100 <= int(card_number[:6]) <= 272099):
+        return 'MasterCard'
+    elif card_number.startswith(('34', '37')):
+        return 'American Express'
+    elif (card_number.startswith('6011') or
+          card_number.startswith(('644', '645', '646', '647', '648', '649')) or
+          card_number.startswith('65') or
+          622126 <= int(card_number[:6]) <= 622925):
+        return 'Discover'
+    else:
+        return 'Unknown'
+
 # The code below is not needed for the package but can be used for a simple CLI or tests
 if __name__ == "__main__":
     # Example usage:
