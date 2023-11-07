@@ -52,7 +52,12 @@ class Luhn:
         card_number_without_check_digit = ''.join(card_number)
         check_digit = Luhn.generate_check_digit(card_number_without_check_digit)
         return card_number_without_check_digit + str(check_digit)
-
+    
+    @staticmethod
+    def mask_card_number(card_number):
+        """Masks a credit card number for safe display"""
+        masked_card = '*' * (len(card_number) - 4) + card_number[-4:]
+        return masked_card
 
 # The code below is not needed for the package but can be used for a simple CLI or tests
 if __name__ == "__main__":
