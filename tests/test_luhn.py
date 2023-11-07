@@ -1,4 +1,4 @@
-from luhn_checker.luhn import Luhn
+from luhnchecker.luhn import Luhn
 import pytest
 
 
