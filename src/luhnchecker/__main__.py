@@ -2,6 +2,7 @@
 import sys
 from .luhn import Luhn
 
+
 def print_menu():
     print("Welcome to Luhn Checker CLI")
     print("1. Check a card number")
@@ -10,6 +11,7 @@ def print_menu():
     print("4. Generate a card number")
     print("5. Exit")
     print("Enter your choice (1-5):")
+
 
 def main():
     while True:
@@ -45,6 +47,7 @@ def main():
             sys.exit(0)
         else:
             print("Invalid choice. Please try again.")
+
 
 if __name__ == "__main__":
     main()
