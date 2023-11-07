@@ -8,10 +8,8 @@ class Luhn:
         return [int(d) for d in str(n)]
 
     @staticmethod
-    def check_luhn(card_number):
-        """credit card number check with luhn algorithm."""
-
-        digits = Luhn._digits_of(card_number)
+    def check_luhn(card_number1):
+        digits = Luhn._digits_of(card_number1)
         odd_digits = digits[-1::-2]
         even_digits = digits[-2::-2]
 
@@ -47,22 +45,19 @@ class Luhn:
         if length < 13 or length > 19:
             raise ValueError("Card number length must be between 13 and 19")
 
-        card_number = [random.randint(0, 9) for _ in range(length - 1)]
-        card_number = [str(digit) for digit in card_number]
-        card_number_without_check_digit = ''.join(card_number)
-        check_digit = Luhn.generate_check_digit(card_number_without_check_digit)
-        return card_number_without_check_digit + str(check_digit)
-    
+        # Generate a card number with length minus one
+        card_number_without_check_digit = ''.join(str(random.randint(0, 9)) for _ in range(length - 1))
+
+        # The check digit is what needs to be added to make the sum of the digits
+        # a multiple of 10. Here we calculate it by constructing what the full card
+        # number would be with a 0 in the check digit position, and then adjusting
+        # the check digit until the whole number passes the Luhn check.
+        for check_digit in range(10):
+            if Luhn.check_luhn(card_number_without_check_digit + str(check_digit)):
+                return card_number_without_check_digit + str(check_digit)
+
     @staticmethod
     def mask_card_number(card_number):
         """Masks a credit card number for safe display"""
         masked_card = '*' * (len(card_number) - 4) + card_number[-4:]
         return masked_card
-
-# The code below is not needed for the package but can be used for a simple CLI or tests
-if __name__ == "__main__":
-    # Example usage:
-    card_numbers = ["49927398716", "49927398717", "1234567812345670", "1234567812345678"]
-
-    for number in card_numbers:
-        print(f"Card number {number} is", "valid." if Luhn.check_luhn(number) else "invalid.")

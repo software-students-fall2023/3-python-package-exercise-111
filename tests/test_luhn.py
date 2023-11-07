@@ -20,3 +20,4 @@ def test_generate_luhn_invalid_length():
 def test_generate_luhn_passes_check():
     card_number = Luhn.generate_luhn()
     assert Luhn.check_luhn(card_number)
+
