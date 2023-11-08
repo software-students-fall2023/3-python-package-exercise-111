@@ -1,5 +1,7 @@
 import random
 
+import luhnchecker.luhn
+
 
 class Luhn:
     @staticmethod
@@ -10,6 +12,7 @@ class Luhn:
     @staticmethod
     def check_luhn(card_number):
         """credit card number check with luhn algorithm."""
+        card_number = card_number.replace(" ", "")
 
         digits = Luhn._digits_of(card_number)
         odd_digits = digits[-1::-2]
@@ -44,6 +47,7 @@ class Luhn:
 
     @staticmethod
     def validate_card_format(card_number):
+        card_number = card_number.replace(" ", "")
         """Basic validation to check card number format."""
         return card_number.isdigit() and 13 <= len(card_number) <= 19
 
@@ -75,29 +79,22 @@ class Luhn:
 
     @staticmethod
     def credit_card_issuer(card_number):
-
-        if card_number.startswith('4'):
-            return 'Visa'
-        elif any(card_number.startswith(str(i)) for i in range(51, 56)) or \
-                222100 <= int(card_number[:6]) <= 272099:
-            return 'MasterCard'
-        elif card_number.startswith(('34', '37')):
-            return 'American Express'
-        elif card_number.startswith('6011') or \
-                any(card_number.startswith(str(i)) for i in range(622126, 622926)) or \
-                any(card_number.startswith(str(i)) for i in range(644, 650)) or \
-                card_number.startswith('65'):
-            return 'Discover'
+        card_number = card_number.replace(" ", "")
+        if luhnchecker.luhn.Luhn.check_luhn(card_number):
+            if card_number.startswith('4'):
+                return 'Visa'
+            elif any(card_number.startswith(str(i)) for i in range(51, 56)) or \
+                    222100 <= int(card_number[:6]) <= 272099:
+                return 'MasterCard'
+            elif card_number.startswith(('34', '37')):
+                return 'American Express'
+            elif card_number.startswith('6011') or \
+                    any(card_number.startswith(str(i)) for i in range(622126, 622926)) or \
+                    any(card_number.startswith(str(i)) for i in range(644, 650)) or \
+                    card_number.startswith('65'):
+                return 'Discover'
+            else:
+                return 'Unknown'
         else:
-            return 'Unknown'
+            return 'invalid card number'
 
-
-if __name__ == "__main__":
-    card_numbers = ["49927398716", "49927398717", "1234567812345670", "1234567812345678"]
-
-    for number in card_numbers:
-        if Luhn.check_luhn(number):
-            issuer = Luhn.credit_card_issuer(number)
-            print(f"Card number {number} is valid. Issuer: {issuer}.")
-        else:
-            print(f"Card number {number} is invalid.")
