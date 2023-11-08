@@ -49,6 +49,14 @@ masked_number = Luhn.mask_card_number(card_number)
 print(f"Masked card number: {masked_number}")
 ```
 
+### Determining the Credit Card Issuer
+
+```python
+card_number = "1234567812345670"
+issuer = Luhn.credit_card_issuer(card_number)
+print(f"The issuer of the card number {card_number} is {issuer}.")
+```
+
 ## Contributing
 
 We welcome contributions to LuhnChecker! Here's how you can set up the project for development:
