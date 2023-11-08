@@ -70,23 +70,23 @@ class Luhn:
         masked_card = '*' * (len(card_number) - 4) + card_number[-4:]
         return masked_card
 
+    @staticmethod
+    def credit_card_issuer(card_number):
 
-def credit_card_issuer(card_number):
-
-    if card_number.startswith('4'):
-        return 'Visa'
-    elif any(card_number.startswith(str(i)) for i in range(51, 56)) or \
-        222100 <= int(card_number[:6]) <= 272099:
-        return 'MasterCard'
-    elif card_number.startswith(('34', '37')):
-        return 'American Express'
-    elif card_number.startswith('6011') or \
-        any(card_number.startswith(str(i)) for i in range(622126, 622926)) or \
-        any(card_number.startswith(str(i)) for i in range(644, 650)) or \
-        card_number.startswith('65'):
-        return 'Discover'
-    else:
-        return 'Unknown'
+        if card_number.startswith('4'):
+            return 'Visa'
+        elif any(card_number.startswith(str(i)) for i in range(51, 56)) or \
+            222100 <= int(card_number[:6]) <= 272099:
+            return 'MasterCard'
+        elif card_number.startswith(('34', '37')):
+            return 'American Express'
+        elif card_number.startswith('6011') or \
+            any(card_number.startswith(str(i)) for i in range(622126, 622926)) or \
+            any(card_number.startswith(str(i)) for i in range(644, 650)) or \
+            card_number.startswith('65'):
+            return 'Discover'
+        else:
+            return 'Unknown'
 
 
 if __name__ == "__main__":
@@ -94,7 +94,7 @@ if __name__ == "__main__":
 
     for number in card_numbers:
         if Luhn.check_luhn(number):
-            issuer = credit_card_issuer(number)
+            issuer = Luhn.credit_card_issuer(number)
             print(f"Card number {number} is valid. Issuer: {issuer}.")
         else:
             print(f"Card number {number} is invalid.")
