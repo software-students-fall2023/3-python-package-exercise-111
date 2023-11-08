@@ -16,7 +16,8 @@ LuhnChecker is a Python library for validating, generating, and processing credi
 To install LuhnChecker, simply use pip:
 
 ```bash
-pip install luhnchecker
+pipenv install -i https://test.pypi.org/simple/ luhnchecker==0.0.10
+
 ```
 
 ## Usage
@@ -52,7 +53,6 @@ print(f"Masked card number: {masked_number}")
 ### Determining the Credit Card Issuer
 
 ```python
-card_number = "1234567812345670"
 issuer = Luhn.credit_card_issuer(card_number)
 print(f"The issuer of the card number {card_number} is {issuer}.")
 ```
@@ -97,4 +97,4 @@ Distributed under the GNU General Public License v3.0. See `LICENSE` for more in
 
 LuhnChecker is also available through the Python Package Index (PyPI):
 
-[luhnchecker on PyPI](https://pypi.org/project/luhnchecker/)
+[luhnchecker on PyPI](https://test.pypi.org/project/luhnchecker/0.0.10/)
