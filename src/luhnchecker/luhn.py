@@ -21,20 +21,26 @@ class Luhn:
         return checksum % 10 == 0
 
     @staticmethod
-    def generate_check_digit(card_number_without_check_digit):
-        """Generate the final digit of a card number using the Luhn algorithm.
-            ex. generate a random 14 digits and add a valid check digit to the 15th
-            in order to pass the check_luhn.
-        """
-        digits = Luhn._digits_of(card_number_without_check_digit)
-        odd_digits = digits[-1::-2]
-        even_digits = digits[-2::-2]
-
-        checksum = sum(odd_digits)
-        for d in even_digits:
-            checksum += sum(Luhn._digits_of(d * 2))
-
-        return (10 - (checksum % 10)) % 10
+    def generate_check_digit(number):
+    def generate_check_digit(number):
+        # Check if the input is an empty string
+        if not number:
+            raise ValueError("Cannot generate a check digit from an empty string")
+        # Check if the input is all digits
+        if not number.isdigit():
+            raise ValueError("Input must be a numeric string")
+        # Implementation of the Luhn algorithm to generate the check digit
+        digits = digits_of(number)[::-1]
+        checksum = 0
+        for i, digit in enumerate(digits):
+            if i % 2 == 0: 
+                doubled = digit * 2
+                checksum += doubled - 9 if doubled > 9 else doubled
+            else:
+                checksum += digit
+        # The check digit is the amount needed to make the sum a multiple of 10
+        check_digit = (10 - (checksum % 10)) % 10
+        return check_digit
 
     @staticmethod
     def validate_card_format(card_number):
