@@ -21,3 +21,57 @@ class Tests:
         is_valid = Luhn.check_luhn(card_number)
         # If check_luhn returns True, the test passes. If not, print the card number.
         assert is_valid, f"Generated card number {card_number} failed the Luhn check"
+
+    
+    #----->check_luhn<-----#
+    # this is to check the check_luhn function in luhn.py works properly with valid number.
+    def test_check_luhn_valid(self):
+        valid_luhn_number = "4532015112830366"  # this number is arbitrary, but it has to be a valid number.
+        assert Luhn.check_luhn(valid_luhn_number), f"The Luhn number {valid_luhn_number} should be valid."
+    
+    # this is to check the check_luhn function in luhn.py works properly with invalid number.
+    def test_check_luhn_invalid(self):
+        # Test with a known invalid Luhn number.
+        invalid_luhn_number = "4532015112830367"  # this number is arbitrary, but it has to be a invalid number.
+        assert not Luhn.check_luhn(invalid_luhn_number), f"The Luhn number {invalid_luhn_number} should be invalid."
+    
+    # this is to check the check_luhn function in luhn.py works properly with non numeric number.
+    def test_check_luhn_non_numeric(self):
+        # Test with a non-numeric input, expecting a failure.
+        non_numeric_luhn_number = "4532a1511283b366"  # this number is arbitrary, but it has to be a non numeric number.
+        with pytest.raises(ValueError) as excinfo:
+            Luhn.check_luhn(non_numeric_luhn_number)
+        assert "invalid literal for int()" in str(excinfo.value), "A ValueError should be raised for non-numeric input."
+    #----->check_luhn<-----#
+
+
+
+    #----->generate_check_digit<-----#
+    
+    def test_generate_check_digit_creates_valid_luhn(self):
+        # Take a known number without its Luhn check digit
+        number_without_check_digit = "7992739871"  # A number that needs a Luhn check digit
+        # Generate the check digit
+        check_digit = Luhn.generate_check_digit(number_without_check_digit)
+        # Verify the entire number is now a valid Luhn number
+        full_number = number_without_check_digit + str(check_digit)
+        assert Luhn.check_luhn(full_number), f"The generated check digit does not create a valid Luhn number: {full_number}"
+    
+    def test_generate_check_digit_with_non_numeric_input(self):
+        # Verify that non-numeric input raises an error
+        non_numeric_input = "12345a"
+        with pytest.raises(ValueError) as excinfo:
+            Luhn.generate_check_digit(non_numeric_input)
+        assert "Input must be a numeric string" in str(excinfo.value), "A ValueError should be raised for non-numeric input."
+
+    
+    def test_generate_check_digit_with_empty_string(self):
+        # Verify that an empty string raises an error or behaves as expected
+        with pytest.raises(ValueError) as excinfo:
+            Luhn.generate_check_digit("")
+        # Here we assume that generate_check_digit method raises a ValueError for an empty string
+        # adapt the expected error message if your method behaves differently
+        assert "Cannot generate a check digit from an empty string" in str(excinfo.value), "A ValueError should be raised for an empty input."
+    
+    #----->generate_check_digit<-----#
+
