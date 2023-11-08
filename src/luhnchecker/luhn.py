@@ -59,6 +59,12 @@ class Luhn:
                 return card_number_without_check_digit + str(check_digit)
 
     @staticmethod
+    def mask_card_number(card_number):
+        """Masks a credit card number for safe display"""
+        masked_card = '*' * (len(card_number) - 4) + card_number[-4:]
+        return masked_card
+
+    @staticmethod
     def credit_card_issuer(card_number):
 
         if card_number.startswith('4'):
