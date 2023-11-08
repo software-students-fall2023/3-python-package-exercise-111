@@ -107,5 +107,5 @@ class Tests:
         # Test masking an empty string
         card_empty = ''
         assert Luhn.mask_card_number(card_empty) == ''
-
+        
     #----->mask_card_number<-----#
