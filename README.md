@@ -1,6 +1,6 @@
 # LuhnChecker - Credit Card Validation and Generation
 
-[![Build Status](https://github.com/software-students-fall2023/3-python-package-exercise-111/actions/workflows/build.yaml/badge.svg)](https://github.com/software-students-fall2023/3-python-package-exercise-111/actions)
+[![Build Status](https://github.com/software-students-fall2023/3-python-package-exercise-111/actions/workflows/build.yaml/badge.svg?event=pull_request)](https://github.com/software-students-fall2023/3-python-package-exercise-111/actions/workflows/build.yaml)
 
 LuhnChecker is a Python library for validating, generating, and processing credit card numbers. This package provides a simple interface to implement the Luhn algorithm (also known as the mod 10 algorithm) which is widely used for validation of identification numbers.
 
