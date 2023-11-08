@@ -66,8 +66,11 @@ class Luhn:
 
     @staticmethod
     def mask_card_number(card_number):
-        """Masks a credit card number for safe display"""
-        masked_card = '*' * (len(card_number) - 4) + card_number[-4:]
+        """Masks a credit card number for safe display, removing spaces."""
+        # Remove any spaces from the card number
+        card_number_no_spaces = card_number.replace(" ", "")
+        # Mask all but the last four characters
+        masked_card = '*' * (len(card_number_no_spaces) - 4) + card_number_no_spaces[-4:]
         return masked_card
 
     @staticmethod
