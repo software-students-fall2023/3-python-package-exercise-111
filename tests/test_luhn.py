@@ -22,7 +22,7 @@ class Tests:
         # If check_luhn returns True, the test passes. If not, print the card number.
         assert is_valid, f"Generated card number {card_number} failed the Luhn check"
 
-
+    
     #----->check_luhn<-----#
     # this is to check the check_luhn function in luhn.py works properly with valid number.
     def test_check_luhn_valid(self):
@@ -62,7 +62,8 @@ class Tests:
         non_numeric_input = "12345a"
         with pytest.raises(ValueError) as excinfo:
             Luhn.generate_check_digit(non_numeric_input)
-        assert "invalid literal for int()" in str(excinfo.value), "A ValueError should be raised for non-numeric input."
+        assert "Input must be a numeric string" in str(excinfo.value), "A ValueError should be raised for non-numeric input."
+
     
     def test_generate_check_digit_with_empty_string(self):
         # Verify that an empty string raises an error or behaves as expected
