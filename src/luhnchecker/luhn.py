@@ -22,7 +22,6 @@ class Luhn:
 
     @staticmethod
     def generate_check_digit(number):
-    def generate_check_digit(number):
         # Check if the input is an empty string
         if not number:
             raise ValueError("Cannot generate a check digit from an empty string")
@@ -30,7 +29,8 @@ class Luhn:
         if not number.isdigit():
             raise ValueError("Input must be a numeric string")
         # Implementation of the Luhn algorithm to generate the check digit
-        digits = digits_of(number)[::-1]
+        digits = Luhn._digits_of(number)[::-1]
+
         checksum = 0
         for i, digit in enumerate(digits):
             if i % 2 == 0: 
