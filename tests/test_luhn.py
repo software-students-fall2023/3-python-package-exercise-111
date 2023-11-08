@@ -92,3 +92,20 @@ class Tests:
         assert Luhn.credit_card_issuer(amex_card) == 'American Express', "The issuer should be American Express."
     
     #----->credit_card_issuer<-----#
+
+    #----->mask_card_number<-----#
+    # this is to check the mask_card_number function in luhn.py works properly with valid number.
+    def test_mask_card_number(self):
+        # Test masking a valid card number with space
+        card_with_space = '1234 5678 9012 3456'
+        assert Luhn.mask_card_number(card_with_space) == '************3456'
+
+        # Test masking a card number with no spaces
+        card_without_space = '1234567890123456'
+        assert Luhn.mask_card_number(card_without_space) == '************3456'
+
+        # Test masking an empty string
+        card_empty = ''
+        assert Luhn.mask_card_number(card_empty) == ''
+
+    #----->mask_card_number<-----#
