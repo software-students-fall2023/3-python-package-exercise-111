@@ -67,6 +67,17 @@ class Luhn:
     @staticmethod
     def mask_card_number(card_number):
         """Masks a credit card number for safe display"""
+         # Check if the input is a string
+        if not isinstance(card_number, str):
+            raise ValueError("Input must be a string")
+
+        # Check if the input string contains at least 4 digits
+        if len(card_number) < 4 or not card_number[-4:].isdigit():
+            raise ValueError("Invalid card number format")
+        
+        # Remove spaces from the input string
+        card_number = card_number.replace(" ", "")
+        
         masked_card = '*' * (len(card_number) - 4) + card_number[-4:]
         return masked_card
 
