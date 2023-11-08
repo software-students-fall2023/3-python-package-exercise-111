@@ -16,7 +16,7 @@ LuhnChecker is a Python library for validating, generating, and processing credi
 To install LuhnChecker, simply use pip:
 
 ```bash
-pipenv install -i https://test.pypi.org/simple/ luhnchecker==0.0.10
+pipenv install -i https://test.pypi.org/simple/ luhnchecker==0.0.11
 
 ```
 
@@ -97,4 +97,4 @@ Distributed under the GNU General Public License v3.0. See `LICENSE` for more in
 
 LuhnChecker is also available through the Python Package Index (PyPI):
 
-[luhnchecker on PyPI](https://test.pypi.org/project/luhnchecker/0.0.10/)
+[luhnchecker on PyPI](https://test.pypi.org/project/luhnchecker/0.0.11/)

@@ -12,6 +12,7 @@ class Luhn:
     @staticmethod
     def check_luhn(card_number):
         """credit card number check with luhn algorithm."""
+        card_number = card_number.replace(" ", "")
 
         digits = Luhn._digits_of(card_number)
         odd_digits = digits[-1::-2]
@@ -46,6 +47,7 @@ class Luhn:
 
     @staticmethod
     def validate_card_format(card_number):
+        card_number = card_number.replace(" ", "")
         """Basic validation to check card number format."""
         return card_number.isdigit() and 13 <= len(card_number) <= 19
 
@@ -77,6 +79,7 @@ class Luhn:
 
     @staticmethod
     def credit_card_issuer(card_number):
+        card_number = card_number.replace(" ", "")
         if luhnchecker.luhn.Luhn.check_luhn(card_number):
             if card_number.startswith('4'):
                 return 'Visa'
