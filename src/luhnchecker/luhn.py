@@ -21,19 +21,19 @@ class Luhn:
         return checksum % 10 == 0
 
     @staticmethod
-    def generate_check_digit(number):
+    def generate_check_digit(number1):
         # Check if the input is an empty string
-        if not number:
+        if not number1:
             raise ValueError("Cannot generate a check digit from an empty string")
         # Check if the input is all digits
-        if not number.isdigit():
+        if not number1.isdigit():
             raise ValueError("Input must be a numeric string")
         # Implementation of the Luhn algorithm to generate the check digit
-        digits = Luhn._digits_of(number)[::-1]
+        digits = Luhn._digits_of(number1)[::-1]
 
         checksum = 0
         for i, digit in enumerate(digits):
-            if i % 2 == 0: 
+            if i % 2 == 0:
                 doubled = digit * 2
                 checksum += doubled - 9 if doubled > 9 else doubled
             else:
@@ -79,14 +79,14 @@ class Luhn:
         if card_number.startswith('4'):
             return 'Visa'
         elif any(card_number.startswith(str(i)) for i in range(51, 56)) or \
-            222100 <= int(card_number[:6]) <= 272099:
+                222100 <= int(card_number[:6]) <= 272099:
             return 'MasterCard'
         elif card_number.startswith(('34', '37')):
             return 'American Express'
         elif card_number.startswith('6011') or \
-            any(card_number.startswith(str(i)) for i in range(622126, 622926)) or \
-            any(card_number.startswith(str(i)) for i in range(644, 650)) or \
-            card_number.startswith('65'):
+                any(card_number.startswith(str(i)) for i in range(622126, 622926)) or \
+                any(card_number.startswith(str(i)) for i in range(644, 650)) or \
+                card_number.startswith('65'):
             return 'Discover'
         else:
             return 'Unknown'
