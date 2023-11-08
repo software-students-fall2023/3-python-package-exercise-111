@@ -67,7 +67,7 @@ We welcome contributions to LuhnChecker! Here's how you can set up the project f
    ```
 2. Navigate to the project directory:
    ```bash
-   cd luhnchecker
+   cd 3-python-package-exercise-111
    ```
 3. Install the project along with its development dependencies using pipenv:
    ```bash
