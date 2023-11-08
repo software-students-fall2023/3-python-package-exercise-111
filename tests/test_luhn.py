@@ -79,15 +79,15 @@ class Tests:
 
     #----->credit_card_issuer<-----#
     
-    def test_issuer_visa():
+    def test_issuer_visa(self):
         visa_card = '4111111111111111'  # A known Visa pattern
         assert Luhn.credit_card_issuer(visa_card) == 'Visa', "The issuer should be Visa."
 
-    def test_issuer_mastercard():
+    def test_issuer_mastercard(self):
         mastercard_card = '5500000000000004'  # A known MasterCard pattern
         assert Luhn.credit_card_issuer(mastercard_card) == 'MasterCard', "The issuer should be MasterCard."
 
-    def test_issuer_amex():
+    def test_issuer_amex(self):
         amex_card = '341111111111111'  # A known American Express pattern
         assert Luhn.credit_card_issuer(amex_card) == 'American Express', "The issuer should be American Express."
     
