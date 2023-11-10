@@ -1,0 +1,32 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "luhnchecker"
+description = "An helper tool that verify the validity of credit card numbers."
+version = "0.0.12"
+authors = [
+  { name="team 111", email="khl446@nyu.edu" },
+]
+license = { file = "LICENSE" }
+readme = "README.md"
+keywords = ["python", "package", "build", "tutorial"]
+requires-python = ">=3.7"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Intended Audience :: Education",
+    "License :: OSI Approved :: GNU General Public License v3 (GPLv3)",
+    "Operating System :: OS Independent",
+]
+
+[project.optional-dependencies]
+dev = ["pytest"]
+
+[project.urls]
+"luhntesters" = "https://github.com/software-students-fall2023/3-python-package-exercise-111/tree/main/tests"
+"Repository" = "https://github.com/software-students-fall2023/3-python-package-exercise-111"
+"luhnchecker" = "https://github.com/software-students-fall2023/3-python-package-exercise-111/tree/main/src/luhnchecker"
+
+[project.scripts]
+luhnchecker = "luhnchecker.__main__:main"
